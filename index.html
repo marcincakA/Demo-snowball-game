@@ -50,6 +50,7 @@ button,input{font:inherit;color:inherit}
 /* ---------- scene ---------- */
 #stage{flex:1;min-height:0;position:relative;display:flex;align-items:flex-end;justify-content:center;background:var(--night)}
 #cv{display:block;touch-action:none;cursor:crosshair}
+#status:empty{display:none}
 #status{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(8,20,29,.72);padding:4px 12px;border-radius:99px;font-size:13px;font-weight:500;white-space:nowrap;pointer-events:none}
 
 /* ---------- controls ---------- */
@@ -60,7 +61,9 @@ button,input{font:inherit;color:inherit}
 .ctl input[type=range]{width:100%;min-width:0;height:32px;accent-color:var(--lantern)}
 .step{height:38px;border-radius:10px;border:1px solid #2c5263;background:var(--panel);font-size:20px;font-weight:700;line-height:1;cursor:pointer}
 .step:active{background:#1c4558}
-.go{flex:1 1 150px;min-height:48px;border:0;border-radius:14px;background:var(--mitten);color:#fff;font-family:var(--display);font-weight:800;font-size:21px;cursor:pointer;box-shadow:0 4px 0 #9c2a21}
+.act{flex:1 1 240px;display:flex;gap:8px;align-items:stretch}
+.mv{flex:0 0 54px;height:auto;min-height:48px;touch-action:none;user-select:none;-webkit-user-select:none}
+.go{flex:1 1 auto;min-height:48px;border:0;border-radius:14px;background:var(--mitten);color:#fff;font-family:var(--display);font-weight:800;font-size:21px;cursor:pointer;box-shadow:0 4px 0 #9c2a21}
 .go:active{transform:translateY(3px);box-shadow:0 1px 0 #9c2a21}
 #dock.off{opacity:.45}
 #dock.off *{pointer-events:none}
@@ -93,7 +96,7 @@ h2{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;margi
 #shareTxt{width:100%;min-height:70px;border-radius:12px;border:1px solid #2c5263;background:var(--ink);padding:8px 10px;font:inherit;font-size:14px;color:inherit;resize:none}
 @media (max-height:430px){
   .hud{padding:3px 14px}.pl .nm{font-size:14px}.wind b{font-size:17px}
-  #dock{padding:5px 14px 6px}.go{min-height:40px;font-size:18px}
+  #dock{padding:5px 14px 6px}.go,.mv{min-height:40px}.go{font-size:18px}
 }
 </style>
 </head>
@@ -125,14 +128,18 @@ h2{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;margi
     <button class="step" id="powP" type="button" aria-label="Sila plus">+</button>
     <output id="powO" for="pow">60</output>
   </div>
-  <button class="go" id="throw" type="button">Hoď guľu</button>
+  <div class="act">
+    <button class="step mv" id="mvL" type="button" aria-label="Krok doľava">◀</button>
+    <button class="go" id="throw" type="button">Hoď guľu</button>
+    <button class="step mv" id="mvR" type="button" aria-label="Krok doprava">▶</button>
+  </div>
 </footer>
 
 <!-- menu -->
 <div class="ov" id="menu">
   <div class="card">
     <h1>Vianočná <em>guľovačka</em></h1>
-    <p class="lead">Nastav uhol a silu, počítaj s vetrom a prehoď snehuliakov. Kto prvý trafí súpera 5×, vyhráva.</p>
+    <p class="lead">Pred hodom sa posuň, nastav uhol a silu, počítaj s vetrom a prehoď snehuliakov. Kto prvý trafí súpera 5×, vyhráva.</p>
     <label class="fld"><span>Tvoje meno</span>
       <input class="txt" id="name" maxlength="14" autocomplete="off" placeholder="Hráč"></label>
 
